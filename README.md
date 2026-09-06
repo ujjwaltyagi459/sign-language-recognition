@@ -1,19 +1,30 @@
 # Sign Language Recognition
 
-A Python-based project that recognizes hand gestures for sign language using computer vision, enabling real-time translation of hand signs.
+A real-time hand gesture recognition system built with Python, OpenCV, and MediaPipe that detects and classifies basic sign language gestures using a webcam feed.
 
 ## 📌 Features
 
-- Real-time hand detection and tracking using webcam input
-- Recognizes and classifies sign language gestures
-- Uses computer vision techniques for landmark detection
-- Can be extended to support a full sign language alphabet/vocabulary
+- Real-time hand tracking using webcam input
+- Detects 21 hand landmarks per hand using MediaPipe
+- Classifies finger positions (up/down) to recognize gestures
+- Supports both left and right hand detection
+- Displays the detected sign directly on the video feed
+- Includes debug overlay showing individual finger states
+
+## ✋ Supported Gestures
+
+| Gesture | Hand Position |
+|---------|---------------|
+| **Hello** | Thumb and pinky raised, others down |
+| **Thank You** | Index and middle fingers raised, others down |
+| **Yes** | Only index finger raised |
+| **No** | All fingers raised |
 
 ## 🛠️ Tech Stack
 
 - **Language:** Python
-- **Libraries:** MediaPipe, OpenCV
-- **Concepts Used:** Computer Vision, Hand Landmark Detection, Real-time Image Processing
+- **Libraries:** OpenCV, MediaPipe, NumPy
+- **Concepts Used:** Computer Vision, Hand Landmark Detection, Real-time Video Processing, Gesture Classification Logic
 
 ## 🚀 How to Run
 
@@ -27,29 +38,45 @@ A Python-based project that recognizes hand gestures for sign language using com
    ```
 3. Install the required dependencies
    ```bash
-   pip install mediapipe opencv-python
+   pip install opencv-python mediapipe numpy
    ```
 4. Run the script
    ```bash
    python mp.py
    ```
+5. Press **`q`** to quit the detection window.
 
 ## 📂 Project Structure
 
 ```
 sign-language-recognition/
 │
-├── mp.py          # Main script for hand tracking and gesture recognition
+├── mp.py          # Main script - hand tracking and gesture classification
 └── README.md      # Project documentation
 ```
+
+## ⚙️ How It Works
+
+1. Captures live video from the webcam using OpenCV.
+2. Passes each frame to MediaPipe's Hands solution to detect 21 hand landmarks.
+3. Compares the Y-coordinates of fingertip landmarks against their respective joint landmarks to determine if each finger is raised.
+4. Applies gesture-matching rules based on which fingers are up to classify the sign.
+5. Overlays the detected gesture and debug info on the live video feed.
 
 ## 🎯 What I Learned
 
 Building this project helped me strengthen my understanding of:
 - Computer vision fundamentals using OpenCV
 - Real-time hand landmark detection with MediaPipe
-- Processing and interpreting live camera feed data
-- Bridging accessibility with technology
+- Translating raw landmark coordinates into meaningful gesture logic
+- Processing and interpreting live camera feed data in real time
+
+## 🔮 Future Improvements
+
+- Expand gesture vocabulary beyond the current 4 signs
+- Add support for two-handed gestures
+- Train a machine learning classifier for more robust recognition
+- Convert detected signs to speech output
 
 ## 👤 Author
 
